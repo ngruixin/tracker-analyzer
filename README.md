@@ -5,7 +5,9 @@ Analyzing data sent to first- and third-party domains on both websites and mobil
 # Requirements
 
 Raspberry Pi 
+
 Wireless USB adapter 
+
 Laptop with Wireshark and Google Chrome installed 
 
 # Current Setup
