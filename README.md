@@ -53,7 +53,7 @@ Visit the website www.mitm.it, select the relevant icon that corresponds to the 
 After successfully installing the certificate, the Pi should be successfully intercepting network traffic from the mobile device. Close the browser on the mobile device and access the app to be tested. 
 
 To terminate the capture, hit CTRL-C on the Pi and kill the tshark process. Then run 
-```sudo chmod 666 <FILENAME>```
+```sudo chmod 555 <FILENAME>```
 
 ### Data Analysis 
 
@@ -65,12 +65,13 @@ sudo scp pi@<IP>:/home/pi/.mitmproxy/sslkeylogfile.txt .
 whereby IP refers to the IP address of the Raspberry Pi and file path is the path to the data previously captured. 
 
 On wireshark, open the capture file and decrypt the SSL traffic:
-Edit -> Preferences -> Protocols -> SSL -> (Pre)-Master-Secret log filename
+
+*Edit -> Preferences -> Protocols -> SSL -> (Pre)-Master-Secret log filename*
 
 Set (Pre)-Master-Secret log filename to the sslketlogfile.txt that was obtained. 
 Extract and save packet captures related to HTTP(S) protocol:
-File -> Export PDUs to File... (select OS Layer 7) 
-Save the packet capture. 
+
+*File -> Export PDUs to File... (select OS Layer 7) -> Save the packet capture.* 
 
 *Note: If you are unable to save (button is greyed out), overwrite a .pcapng file or save to the /tmp directory and it should work (it is probably a permissions issue). 
 
