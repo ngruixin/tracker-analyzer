@@ -6,9 +6,9 @@ Analyzing data sent to first- and third-party domains on both websites and mobil
 
 * Raspberry Pi 
 
-Wireless USB adapter 
+* Wireless USB adapter 
 
-Laptop with Wireshark and Google Chrome installed 
+* Laptop with Wireshark and Google Chrome installed 
 
 # Current Setup
 
