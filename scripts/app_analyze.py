@@ -18,9 +18,10 @@ class AppTracker(Tracker):
 		'''
 		layer = packet.layers[1].layer_name
 		if layer == "http": 
+			print(packet.http.user_agent)
 			self.update_http(packet)
 		elif layer == "http2" and "HEADER" in packet.http2.stream:
-			 self.update_http2(packet)
+			self.update_http2(packet)
 		#TODO: figure out how to extract post data http2
 
 	def update_http(self, packet):
@@ -36,11 +37,17 @@ class AppTracker(Tracker):
 		if "host" in fields: 
 			self.domain = packet.http.host 
 		if "cookie" in fields: 
-			self.cookies.append(packet.http.cookie)
+			c = packet.http.cookie
+			if c not in self.cookies:
+				self.cookies.append(c)
 		if "file_data" in fields: 
-			self.data.append(packet.http.file_data)
+			data = packet.http.file_data
+			if data not in self.data:
+				self.data.append(data)
 		if "request_uri_query" in fields: 
-			self.uris.append(packet.http.request_uri_query)
+			uri = packet.http.request_uri_query
+			if uri not in self.uris:
+				self.uris.append(uri)
 		#for i in range(len(fields)):
 		#	field = fields[i]
 		#	if field not in http2_headers \
@@ -70,14 +77,18 @@ class AppTracker(Tracker):
 					idx = value.find('?')
 					if idx != -1:
 						params = value[idx+1:]
-						self.uris.append(params)
+						if params not in self.uris:
+							self.uris.append(params)
 				elif key == "cookie":
-					self.cookies.append(value)
+					if value not in self.cookies:
+						self.cookies.append(value)
 				elif key.lower() not in http_headers \
 				and key.lower() not in http2_headers: 
 					h = key.lower() + ": " + value
 					if h not in self.headers:
 						self.headers.append(h)
+				elif key == "user_agent":
+					print(value)
 		except Exception as e:
 			#print(e)
 			pass
@@ -124,4 +135,4 @@ def analyze_app(path, host_ip):
 	print(*trackers, sep = "\n") 
 
 if __name__ == "__main__":
-	analyze_app('/Users/ruixin/Desktop/kali/capture-01.pcapng', "192.168.10.10")
+	analyze_app('/Users/ruixin/Desktop/kali/instagram.pcapng', "192.168.10.10")

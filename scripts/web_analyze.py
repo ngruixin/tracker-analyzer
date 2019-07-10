@@ -92,4 +92,4 @@ def analyze_web(path):
 	print(*trackers, sep = "\n") 
 
 if __name__ == "__main__":
-	analyze_web('/Users/ruixin/Desktop/cs/capstone/data/www.bing.com.har')
+	analyze_web('/Users/ruixin/Desktop/cs/capstone/tracker-analyzer/data/www.youtube.com.har')
