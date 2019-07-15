@@ -135,4 +135,4 @@ def analyze_app(path, host_ip):
 	print(*trackers, sep = "\n") 
 
 if __name__ == "__main__":
-	analyze_app('/Users/ruixin/Desktop/kali/instagram.pcapng', "192.168.10.10")
+	analyze_app('/Users/ruixin/Desktop/kali/periscope.pcapng', "192.168.10.10")

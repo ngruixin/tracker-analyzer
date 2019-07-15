@@ -9,14 +9,14 @@ SSID="${1:-RDRTesting}"
 # set password of access point to connect to (default: RDRTesting)
 PASSPHRASE="${2:-RDRTesting}"
 
-# set ip range assigned to devices connected to access point (default: 192.168.1.0/255)
+# set ip range assigned to devices connected to access point (default: 192.168.10.0/255)
 IP_RANGE="${3:-192.168.10}"
 
-# set network interfa19ce for incoming internet connection (default: eth0)
-IN="${4:-ens33}"
+# set network interface for incoming internet connection (default: eth0)
+IN="${4:-eth0}"
 
-# set network interface on which the wireless access point is hosted (default: wlan0)
-OUT="${5:-wlan0}"
+# set network interface on which the wireless access point is hosted (default: wlan1)
+OUT="${5:-wlan1}"
 
 
 echo "Setting up your wireless access point with the following configurations:"

@@ -1,5 +1,5 @@
 import json 
-from urllib.parse import urlparse
+from urllib.parse import urlparse, unquote
 from tracker import Tracker, http_headers, http2_headers
 
 class WebTracker(Tracker):
@@ -18,8 +18,9 @@ class WebTracker(Tracker):
 		'''
 		url = urlparse(entry["request"]["url"])
 		self.domain = url.netloc
+		q = unquote(url.query)
 		if url.query not in self.uris and url.query != "":
-			self.uris.append(url.query)
+			self.uris.append(q)
 		cookies = entry["request"]["cookies"]
 		for cookie in cookies:
 			new_c = cookie["name"] + "=" + cookie["value"]
@@ -47,7 +48,7 @@ class WebTracker(Tracker):
 		'''
 		if "postData" in entry["request"].keys():
 			postData = entry["request"]["postData"]
-			text = postData["text"]
+			text = unquote(postData["text"])
 			#params = postData["params"]
 			if text != "" and text not in self.data:
 				self.data.append(text)
@@ -92,4 +93,4 @@ def analyze_web(path):
 	print(*trackers, sep = "\n") 
 
 if __name__ == "__main__":
-	analyze_web('/Users/ruixin/Desktop/cs/capstone/tracker-analyzer/data/www.youtube.com.har')
+	analyze_web('/Users/ruixin/Desktop/cs/capstone/tracker-analyzer/data/www.bing.com.har')
