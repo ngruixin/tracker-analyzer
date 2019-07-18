@@ -75,6 +75,11 @@ Extract and save packet captures related to HTTP(S) protocol:
 
 *Note: If you are unable to save (button is greyed out), overwrite a .pcapng file or save to the /tmp directory and it should work (it is probably a permissions issue). 
 
+Run the following command to extract the relevant data:
+```
+python3 app_analyis.py <filename>
+```
+
 # Web Analysis
 1. Open Google Chrome.
 2. From the Chrome menu bar select View > Developer > Developer Tools.
@@ -82,4 +87,4 @@ Extract and save packet captures related to HTTP(S) protocol:
 4. Check the box Preserve log.
 5. Visit the website to audit. 
 6. Right-click anywhere on the grid of network requests, select Save as HAR with Content, and save the file to your computer.
-7. 
+7. Run the command `python3 web_analyis.py <filename>` 
