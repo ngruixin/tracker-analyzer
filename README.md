@@ -79,6 +79,7 @@ Run the following command to extract the relevant data:
 ```
 python3 app_analyis.py <filename>
 ```
+Manually analyze the output to classify the type of user data sent. 
 
 # Web Analysis
 1. Open Google Chrome.
@@ -88,3 +89,4 @@ python3 app_analyis.py <filename>
 5. Visit the website to audit. 
 6. Right-click anywhere on the grid of network requests, select Save as HAR with Content, and save the file to your computer.
 7. Run the command `python3 web_analyis.py <filename>` 
+8. Manually analyze the output to classify the type of user data sent. 
