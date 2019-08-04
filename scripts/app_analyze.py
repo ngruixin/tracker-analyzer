@@ -1,3 +1,7 @@
+# Usage: python3 app_analyze.py <file path> <host IP> 
+# Example: python3 app_analyze.py /Users/ruixin/Desktop/kali/periscope.pcapng 192.168.10.10
+
+import sys
 import pyshark
 from pprint import pprint
 from hpack import Encoder, Decoder
@@ -22,7 +26,6 @@ class AppTracker(Tracker):
 			self.update_http(packet)
 		elif layer == "http2" and "HEADER" in packet.http2.stream:
 			self.update_http2(packet)
-		#TODO: figure out how to extract post data http2
 
 	def update_http(self, packet):
 		'''
@@ -48,13 +51,6 @@ class AppTracker(Tracker):
 			uri = packet.http.request_uri_query
 			if uri not in self.uris:
 				self.uris.append(uri)
-		#for i in range(len(fields)):
-		#	field = fields[i]
-		#	if field not in http2_headers \
-		#	and field not in http2_headers:
-		#	h = field + ": " + packet.http
-		#	self.headers.append()
-		#TODO: include custom header information
 
 	def update_http2(self, packet):
 		'''
@@ -116,8 +112,6 @@ def analyze_app(path, host_ip):
 		host_ip is the IP address of the host machine.
 	'''
 	cap = pyshark.FileCapture(path)
-	#pprint(vars(cap[0]))
-	#pprint(vars(cap[0].http2))
 	trackers = []
 	for packet in cap:
 		server_ip = packet.exported_pdu.ipv4_dst
@@ -135,4 +129,5 @@ def analyze_app(path, host_ip):
 	print(*trackers, sep = "\n") 
 
 if __name__ == "__main__":
-	analyze_app('/Users/ruixin/Desktop/kali/periscope.pcapng', "192.168.10.10")
+	analyze_app(sys.argv[1], sys.argv[2])
+

@@ -1,6 +1,10 @@
+# Usage: python3 web_analyze.py <file path> 
+# Example: python3 web_analyze.py /Users/ruixin/Desktop/cs/capstone/tracker-analyzer/data/www.tumblr.com.har
+
 import json 
 from urllib.parse import urlparse, unquote
 from tracker import Tracker, http_headers, http2_headers
+import sys
 
 class WebTracker(Tracker):
 	'''
@@ -19,7 +23,7 @@ class WebTracker(Tracker):
 		url = urlparse(entry["request"]["url"])
 		self.domain = url.netloc
 		q = unquote(url.query)
-		if url.query not in self.uris and url.query != "":
+		if q not in self.uris and url.query != "":
 			self.uris.append(q)
 		cookies = entry["request"]["cookies"]
 		for cookie in cookies:
@@ -52,11 +56,6 @@ class WebTracker(Tracker):
 			#params = postData["params"]
 			if text != "" and text not in self.data:
 				self.data.append(text)
-			#if params != []:
-			#	for param in params:
-			#		p = param["name"] + "=" + param["value"]
-			#		if p not in self.data:
-			#			self.data.append(p)
 
 def get_existing_tracker(trackers, ip):
 	'''
@@ -93,4 +92,4 @@ def analyze_web(path):
 	print(*trackers, sep = "\n") 
 
 if __name__ == "__main__":
-	analyze_web('/Users/ruixin/Desktop/cs/capstone/tracker-analyzer/data/www.bing.com.har')
+	analyze_web(sys.argv[1])
