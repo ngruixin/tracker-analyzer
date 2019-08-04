@@ -55,7 +55,7 @@ After successfully installing the certificate, the Pi should be successfully int
 To terminate the capture, hit CTRL-C on the Pi and kill the tshark process. Then run 
 ```sudo chmod 555 <FILENAME>```
 
-### Data Analysis 
+## Data Analysis 
 
 To analyze the data collected, obtain the data collected from the Pi on a laptop. 
 ```
@@ -75,4 +75,18 @@ Extract and save packet captures related to HTTP(S) protocol:
 
 *Note: If you are unable to save (button is greyed out), overwrite a .pcapng file or save to the /tmp directory and it should work (it is probably a permissions issue). 
 
+Run the following command to extract the relevant data:
+```
+python3 app_analyis.py <filename>
+```
+Manually analyze the output to classify the type of user data sent. 
 
+# Web Analysis
+1. Open Google Chrome.
+2. From the Chrome menu bar select View > Developer > Developer Tools.
+3. From the panel opened, select the Network tab.
+4. Check the box Preserve log.
+5. Visit the website to audit. 
+6. Right-click anywhere on the grid of network requests, select Save as HAR with Content, and save the file to your computer.
+7. Run the command `python3 web_analyis.py <filename>` 
+8. Manually analyze the output to classify the type of user data sent. 
