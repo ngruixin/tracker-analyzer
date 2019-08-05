@@ -77,8 +77,10 @@ Extract and save packet captures related to HTTP(S) protocol:
 
 Run the following command to extract the relevant data:
 ```
-python3 app_analyis.py <filename>
+python3 app_analyis.py <FILE PATH> <HOST IP>
 ```
+where <HOST IP> is the IP address of the device running the test. 
+  
 Manually analyze the output to classify the type of user data sent. 
 
 # Web Analysis
@@ -88,5 +90,5 @@ Manually analyze the output to classify the type of user data sent.
 4. Check the box Preserve log.
 5. Visit the website to audit. 
 6. Right-click anywhere on the grid of network requests, select Save as HAR with Content, and save the file to your computer.
-7. Run the command `python3 web_analyis.py <filename>` 
+7. Run the command `python3 web_analyis.py <FILE PATH>` 
 8. Manually analyze the output to classify the type of user data sent. 
