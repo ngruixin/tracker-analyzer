@@ -21,9 +21,7 @@ class WebTracker(Tracker):
 				  It is an element of the entries list in a HAR file. 
 		'''
 		url_unparsed = entry["request"]["url"]
-		#print(url_unparsed)
 		if url_unparsed[:5] == "https":
-			#print(url_unparsed)
 			self.isSSL = True
 		url = urlparse(entry["request"]["url"])
 		self.domain = url.netloc

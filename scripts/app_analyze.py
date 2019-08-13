@@ -37,6 +37,7 @@ class AppTracker(Tracker):
 			packet is a http packet. 
 		'''
 		fields = packet.http.field_names
+		#print(fields)
 		if "host" in fields: 
 			self.domain = packet.http.host 
 		if "cookie" in fields: 
@@ -51,6 +52,11 @@ class AppTracker(Tracker):
 			uri = packet.http.request_uri_query
 			if uri not in self.uris:
 				self.uris.append(uri)
+		if "request_full_uri" in fields:
+			url = packet.http.request_full_uri
+			print(url)
+			if url[:5] == "https":
+				self.isSSL = True
 
 	def update_http2(self, packet):
 		'''
@@ -85,6 +91,8 @@ class AppTracker(Tracker):
 						self.headers.append(h)
 				elif key == "user_agent":
 					print(value)
+				elif key == ":scheme" and value == "https":
+					self.isSSL = True
 		except Exception as e:
 			#print(e)
 			pass

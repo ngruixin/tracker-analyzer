@@ -141,8 +141,6 @@ class Tracker:
 		 	request that is not a standard http header  
 	'''
 
-	#self.isSSL = False
-
 	def __init__(self, ip, entry):
 		'''
 		Creates a tracker object with the corresponding attributes
@@ -158,6 +156,7 @@ class Tracker:
 		self.cookies = []
 		self.data = []
 		self.headers = []
+		self.isSSL = False
 		self.update(entry)
 
 	def get_ip(self):
@@ -199,5 +198,6 @@ class Tracker:
 			"URI Params: " + self.str_list(self.uris) + "\n" + \
 			"Cookies: " + self.str_list(self.cookies) + "\n" + \
 			"Post Data: " + self.str_list(self.data) + "\n" + \
-			"Custom Headers: " + self.str_list(self.headers) + "\n" 
+			"Custom Headers: " + self.str_list(self.headers) + "\n" + \
+			"Is Encrypted: " + str(self.isSSL) + "\n"
 		return s
