@@ -24,7 +24,7 @@ On the Raspberry Pi, enable it to work as an access point (AP) by running the in
 ```
 sudo ./install_ap.sh <SSID> <PASSPHRASE> <IP_RANGE> <IN> <OUT>
 ```
-whereby <SSID> refers to the name of the AP to be created, <PASSPHRASE> is the password used to connect to the AP, <IP_RANGE> is the subnet range allocated to devices connected to the AP, <IN> is the input interface from which the Raspberry Pi connects to the internet, and <OUT> is the output interface that broadcasts the WiFi signals (in this case, the network interface of the USB adapter. If none of the parameters are provided, the default configuration will be used (SSID: RDRTesting, passphrase: RDRTesting). 
+whereby <SSID> refers to the name of the AP to be created, <PASSPHRASE> is the password used to connect to the AP, <IP_RANGE> is the first 3 octets of the subnet range allocated to devices connected to the AP (eg 192.168.1), <IN> is the input interface from which the Raspberry Pi connects to the internet, and <OUT> is the output interface that broadcasts the WiFi signals (in this case, the network interface of the USB adapter. If none of the parameters are provided, the default configuration will be used (SSID: RDRTesting, passphrase: RDRTesting). 
 
 Install mitmproxy and tshark on the Raspberry Pi by running the following command. 
 ```
