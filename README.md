@@ -24,7 +24,11 @@ On the Raspberry Pi, enable it to work as an access point (AP) by running the in
 ```
 sudo ./install_ap.sh <SSID> <PASSPHRASE> <IP_RANGE> <IN> <OUT>
 ```
-whereby <SSID> refers to the name of the AP to be created, <PASSPHRASE> is the password used to connect to the AP, <IP_RANGE> is the first 3 octets of the subnet range allocated to devices connected to the AP (eg 192.168.1), <IN> is the input interface from which the Raspberry Pi connects to the internet, and <OUT> is the output interface that broadcasts the WiFi signals (in this case, the network interface of the USB adapter. If none of the parameters are provided, the default configuration will be used (SSID: RDRTesting, passphrase: RDRTesting). 
+Example:
+```
+sudo ./install_ap.sh wifiname wifipassword 192.168.1 eth0 wlan0 
+```
+whereby SSID refers to the name of the AP to be created, PASSPHRASE is the password used to connect to the AP, IP_RANGE is the first 3 octets of the subnet range allocated to devices connected to the AP (eg 192.168.1), IN is the input interface from which the Raspberry Pi connects to the internet, and OUT is the output interface that broadcasts the WiFi signals (in this case, the network interface of the USB adapter. If none of the parameters are provided, the default configuration will be used (SSID: RDRTesting, passphrase: RDRTesting). 
 
 Install mitmproxy and tshark on the Raspberry Pi by running the following command. 
 ```
@@ -44,7 +48,7 @@ pyenv activate mitm
 nohup sudo tshark -w <FILENAME> -i <OUT> &
 mitmdump --mode transparent --showhost 
 ```
-where <FILENAME> is the name of the traffic capture file to be created and <OUT> is the network interface of the wireless adapter. 
+where FILENAME is the name of the traffic capture file to be created and OUT is the network interface of the wireless adapter. 
 
 On the mobile device, disable background app refresh and close all applications. Connect the mobile device to the AP that was setup on the Raspberry Pi. 
 
@@ -62,7 +66,7 @@ To analyze the data collected, obtain the data collected from the Pi on a laptop
 sudo scp pi@<IP>:<FILE PATH> . 
 sudo scp pi@<IP>:/home/pi/.mitmproxy/sslkeylogfile.txt . 
 ```
-whereby IP refers to the IP address of the Raspberry Pi and file path is the path to the data previously captured. 
+whereby IP refers to the IP address of the Raspberry Pi and FILE PATH is the path to the data previously captured. 
 
 On wireshark, open the capture file and decrypt the SSL traffic:
 
@@ -79,7 +83,7 @@ Run the following command to extract the relevant data:
 ```
 python3 app_analyis.py <FILE PATH> <HOST IP>
 ```
-where <HOST IP> is the IP address of the device running the test. 
+where FILE PATH is a path to the traffic capture and HOST IP is the IP address of the device running the test. 
   
 Manually analyze the output to classify the type of user data sent. 
 
